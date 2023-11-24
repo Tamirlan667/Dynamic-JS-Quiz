@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Quiz</title>
+    <link rel="stylesheet" href="./main.css" />
+    <!-- <link rel="stylesheet" href="/css/style.css" /> -->
+  </head>
+  <body>
+    <div class="progress-bar" style="--width: 0%" data-label="Loading..."></div>
+    <div class="quiz" id="quiz" style="display: none">
+      <div class="quiz-header" id="header">
+        <!-- Заголовок вопроса -->
+        <h2 class="title">Загружаем вопрос...</h2>
+
+        <!-- Результаты викторины -->
+        <h2 class="title">%title%</h2>
+        <h3 class="summary">%message%</h3>
+        <p class="result">%result%</p>
+      </div>
+
+      <ul class="quiz-list" id="list">
+        <li>
+          <label>
+            <input type="radio" class="answer" name="answer" />
+            <span>Ответ...</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="radio" class="answer" name="answer" />
+            <span>Ответ...</span>
+          </label>
+        </li>
+      </ul>
+
+      <button class="quiz-submit submit" id="submit">Ответить</button>
+    </div>
+
+    <script src="./main.js"></script>
+    <script>
+      const progressBar = document.querySelector(".progress-bar");
+      const quiz = document.getElementById("quiz");
+
+      // Start the progress bar
+      let width = 0;
+      const progressInterval = setInterval(() => {
+        if (width >= 100) {
+          clearInterval(progressInterval);
+          // After reaching full width, hide the progress bar and show the quiz
+          setTimeout(() => {
+            progressBar.style.display = "none";
+            quiz.style.display = "block";
+          }, 500);
+        } else {
+          width += 0.9;
+          progressBar.style.setProperty("--width", `${width}%`);
+        }
+      }, 10);
+    </script>
+  </body>
+</html>
